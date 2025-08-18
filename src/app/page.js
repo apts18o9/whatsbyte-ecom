@@ -1,5 +1,5 @@
 "use client"
-
+import { Facebook, Instagram, Twitter } from 'lucide-react'
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from './context/CartContext';
@@ -15,10 +15,10 @@ function Header({ searchQuery, setSearchQuery }) {
     return (
         <header className="bg-blue-900 text-white p-4 sticky top-0 z-10 shadow-md">
             <div className="container mx-auto flex items-center justify-between">
-             
+
                 <Link href="/" className="text-2xl font-bold">Whatbytes</Link>
-                
-       
+
+
                 <div className="flex-grow max-w-lg mx-4 relative">
                     <input
                         type="text"
@@ -29,7 +29,7 @@ function Header({ searchQuery, setSearchQuery }) {
                     />
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 </div>
-                
+
                 {/* Cart Icon */}
                 <Link href="/cart" className="relative">
                     <ShoppingCart size={24} className="text-white" />
@@ -46,14 +46,39 @@ function Header({ searchQuery, setSearchQuery }) {
 
 function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-8 mt-12">
-            <div className="container mx-auto text-center">
-                <p>&copy; {new Date().getFullYear()} Whatbytes. All rights reserved.</p>
+        <footer className="bg-blue-900 text-white py-8 mt-12">
+            <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-8 px-4">
+                {/* About Us Section */}
+                <div className="flex flex-col items-center">
+                    <h3 className="font-bold text-lg mb-3">About Us</h3>
+                    <div className="flex flex-col gap-1 justify-center">
+                        <a href="#" className="hover:underline">About Us</a>
+                        <a href="#" className="hover:underline">Contact</a>
+                    </div>
+                </div>
+                {/* Social Section */}
+                <div className="flex flex-col items-center ml-0 md:ml-12">
+                    <h3 className="font-bold text-lg mb-3">Follow Us</h3>
+                    <div className="flex gap-6 mt-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <Facebook className="text-white hover:text-blue-500 bg-blue-800 rounded-full p-1" size={32} />
+                        </a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                            <Twitter className="text-white hover:text-blue-400 bg-blue-800 rounded-full p-1" size={32} />
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <Instagram className="text-white hover:text-pink-500 bg-blue-800 rounded-full p-1" size={32} />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div className="text-center text-sm text-gray-300 mt-6">
+                &copy; {new Date().getFullYear()} Whatbytes. All rights reserved.
             </div>
         </footer>
-    );
-}
 
+    )
+}
 function ProductCard({ product }) {
     const { addToCart } = useCart();
 
@@ -133,20 +158,23 @@ export default function Home() {
         return matchesSearch && matchesCategory && matchesPrice;
     });
 
+
+
     return (
+
         <div className="bg-gray-100 min-h-screen font-sans">
             <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
             <div className="container mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-                {/* Filters Sidebar */}
-                <aside className="md:col-span-1 bg-white p-6 rounded-lg shadow-md h-fit text-gray-900">
+                {/* filter sidebar*/}
+                <aside className="md:col-span-1 bg-blue-600  p-6 rounded-lg shadow-md h-fit text-gray-900">
                     <h2 className="text-2xl font-bold mb-6">Filters</h2>
-                    
+
                     {/* Category Filter */}
-                    <div className="mb-6">
-                        <h3 className="font-semibold text-gray-700 mb-3">Category</h3>
+                    <div className="mb-6" >
+                        <h3 className="font-semibold text-white mb-3">Category</h3>
                         {categories.map(cat => (
-                            <div key={cat} className="flex items-center mb-2">
+                            <div key={cat} className="flex items-center mb-2 text-white">
                                 <input
                                     type="radio"
                                     id={`cat-${cat}`}
@@ -154,18 +182,18 @@ export default function Home() {
                                     value={cat}
                                     checked={category === cat}
                                     onChange={() => setCategory(cat)}
-                                    className="accent-blue-600 h-4 w-4"
+                                    className="accent-blue-600 h-4 w-4 text-white"
                                 />
-                                <label htmlFor={`cat-${cat}`} className="ml-2 text-gray-700">{cat}</label>
+                                <label htmlFor={`cat-${cat}`} className="ml-2 text-white">{cat}</label>
                             </div>
                         ))}
                     </div>
 
                     {/* Price Filter */}
                     <div>
-                        <h3 className="font-semibold text-gray-700 mb-3">Price</h3>
+                        <h3 className="font-semibold text-white mb-3">Price</h3>
                         <div className="flex items-center gap-2 mb-2">
-                            <span className="text-gray-900">${priceRange[0]}</span>
+                            <span className="text-white">${priceRange[0]}</span>
                             <input
                                 type="range"
                                 min="0"
@@ -176,7 +204,7 @@ export default function Home() {
                             />
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="text-gray-900">${priceRange[1]}</span>
+                            <span className="text-white">${priceRange[1]}</span>
                             <input
                                 type="range"
                                 min="0"
@@ -186,7 +214,7 @@ export default function Home() {
                                 className="w-full"
                             />
                         </div>
-                        <div className="flex justify-between text-sm text-gray-500 mt-2">
+                        <div className="flex justify-between text-sm text-white mt-2">
                             <span>Min: $0</span>
                             <span>Max: $1000</span>
                         </div>
